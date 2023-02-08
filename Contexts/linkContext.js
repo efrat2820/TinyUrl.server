@@ -30,10 +30,8 @@ const linkContext ={
     },
 
     redirectLink: async(name)=>{
-        console.log('context');
         const link = await linkModel.findOne({uniqueName:'ultra'});//name
         const originalUrl=link.originalUrl;
-        console.log('originalUrl',originalUrl)
         return originalUrl;
     }
 }

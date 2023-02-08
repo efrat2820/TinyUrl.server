@@ -33,10 +33,9 @@ const LinkController = {
     },
 
     redirect: async(req,res)=>{
-         const {uniqueName} = req.params;
-         const originalUrl = await context.redirectLink(uniqueName);
-         console.log(originalUrl);
-         res.redirect(originalUrl);
+        const {uniqueName} = req.params;
+        const originalUrl = await context.redirectLink(uniqueName);
+        res.redirect(originalUrl);
         
     }
 
