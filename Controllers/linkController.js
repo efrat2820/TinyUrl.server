@@ -15,8 +15,10 @@ const LinkController = {
     add: async(req,res)=>{
         const {originalUrl,uniqueName} = req.body;
         console.log('req.body', req.body)
-        const newLink = await context.addLink(originalUrl,uniqueName);
-        res.send(newLink);
+        await context.addLink(req/*,originalUrl,uniqueName*/);
+        // const tinyLink = "https://tinyurl-m5pd.onrender.com/TinyUrl/"+uniqueName;
+        const tinyLink = "http://localhost:5000/TinyUrl/"+uniqueName;
+        res.send(tinyLink);
     },
 
     update: async(req,res)=>{
@@ -35,6 +37,7 @@ const LinkController = {
     redirect: async(req,res)=>{
         const {uniqueName} = req.params;
         const originalUrl = await context.redirectLink(uniqueName);
+        console.log(originalUrl);
         res.redirect(originalUrl);
         
     }

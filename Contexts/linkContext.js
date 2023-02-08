@@ -1,4 +1,8 @@
 import linkModel from "../Models/LinksModel.js"
+import reqId from "request-ip"
+
+ 
+const clicksId = 124;
 
 const linkContext ={
 
@@ -12,8 +16,11 @@ const linkContext ={
         return link;
     },
 
-    addLink: async(originalUrl,uniqueName)=>{
-        const newLink = new linkModel({originalUrl,uniqueName});
+    addLink: async( req /*,originalUrl,uniqueName*/)=>{
+        const newLink = new linkModel(req.originalUrl,req.uniqueName);
+        newLink.clicks.id = clicksId++;
+        newLink.clicks.insertedAt = Date.now();
+        newLink.clicks.ipAddress = reqId.getClientIp(req);
         newLink.save();
         return newLink;
     },
