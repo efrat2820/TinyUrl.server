@@ -1,4 +1,6 @@
 import context from "../Contexts/linkContext.js"
+import reqId from "request-ip"
+
 
 const LinkController = {
 
@@ -42,9 +44,8 @@ const LinkController = {
 
     redirect: async(req,res)=>{
         const {uniqueName} = req.params;
-        const idAddress = req.socket.localAddress;
+        const idAddress = reqId.getClientIp(res);
         const originalUrl = await context.redirectLink(uniqueName,idAddress);
-        
         console.log(originalUrl);
         res.redirect(originalUrl);
         

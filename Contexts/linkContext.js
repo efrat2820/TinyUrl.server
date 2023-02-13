@@ -1,5 +1,4 @@
 import linkModel from "../Models/LinksModel.js"
-//import reqId from "request-ip"
 
  
 let clicksId = 124;
@@ -40,6 +39,7 @@ const linkContext ={
         const link = await linkModel.findOne({"uniqueName":name});
         link.clicks.push({ id:clicksId++ , insertedAt:Date.now() , ipAddress:ip})
         link.save();
+        console.log(link);
         const originalUrl=link.originalUrl;
         return originalUrl;
     }
