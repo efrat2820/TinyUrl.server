@@ -1,8 +1,8 @@
 import linkModel from "../Models/LinksModel.js"
-import reqId from "request-ip"
+//import reqId from "request-ip"
 
  
-const clicksId = 124;
+let clicksId = 124;
 
 const linkContext ={
 
@@ -16,14 +16,14 @@ const linkContext ={
         return link;
     },
 
-    addLink: async( req /*,originalUrl,uniqueName*/)=>{
-        const newLink = new linkModel(req.originalUrl,req.uniqueName);
-        newLink.clicks.id = clicksId++;
-        newLink.clicks.insertedAt = Date.now();
-        newLink.clicks.ipAddress = reqId.getClientIp(req);
+    addLink: async(originalUrl,uniqueName)=>{
+        if(linkModel.findOne({'uniqueName':uniqueName}))
+            throw Error("exists");
+        const newLink = new linkModel({originalUrl,uniqueName});
         newLink.save();
         return newLink;
     },
+    
 
     updateLink: async(id,link)=>{
         const updateLink = await linkModel.findByIdAndUpdate(id,link,{new:true});
@@ -36,8 +36,12 @@ const linkContext ={
         return deleted;
     },
 
-    redirectLink: async(name)=>{
-        const link = await linkModel.findOne({uniqueName:'ultra'});//name
+    redirectLink: async(name,ip)=>{
+        const link = await linkModel.findOne({"uniqueName":name});
+        link.clicks.push({ id:clicksId++ , insertedAt:Date.now() , ipAddress:ip})
+        // link.clicks.id = clicksId++;
+        // link.clicks.insertedAt = Date.now();
+        //link.clicks.ipAddress = reqId.getClientIp(req);
         const originalUrl=link.originalUrl;
         return originalUrl;
     }

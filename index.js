@@ -19,11 +19,8 @@ app.get("/",(req,res)=>{
    res.send("hello world")
 })
 
-app.use("/TinyUrl",(req,res)=>{
-    
-})
 
-app.use('/links',linksRouter);
+
 app.use('/TinyUrl',linksRouter)
 
 

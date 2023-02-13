@@ -7,7 +7,7 @@ router.get('/',LinkController.getList);
 
 //router.get('/:id',LinkController.getById);
 
-router.get('/:id',LinkController.redirect)
+router.get('/:uniqueName',LinkController.redirect)
 
 router.put('/:id',LinkController.update);
 
