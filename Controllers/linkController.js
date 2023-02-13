@@ -15,15 +15,15 @@ const LinkController = {
     add: async(req,res)=>{
         const {originalUrl,uniqueName} = req.body;
         console.log('req.body', req.body)
-        try{
+        // try{
             await context.addLink(originalUrl,uniqueName);
-        }catch(error){
-            if(error.message == "exists"){
-                res.status(400).send({message:"exists"});
-            }
-        }
-        // const tinyLink = "https://tinyurl-m5pd.onrender.com/TinyUrl/"+uniqueName;
-        const tinyLink = "http://localhost:5000/TinyUrl/"+uniqueName;
+        // }catch(error){
+        //     if(error.message == "exists"){
+        //         res.status(400).send({message:"exists"});
+        //     }
+        //}
+        const tinyLink = "https://tinyurl-m5pd.onrender.com/TinyUrl/"+uniqueName;
+        // const tinyLink = "http://localhost:5000/TinyUrl/"+uniqueName;
         res.send(tinyLink);
     },
 

@@ -17,8 +17,8 @@ const linkContext ={
     },
 
     addLink: async(originalUrl,uniqueName)=>{
-        if(linkModel.findOne({'uniqueName':uniqueName}))
-            throw Error("exists");
+        // if(linkModel.findOne({'uniqueName':uniqueName}))
+        //     throw Error("exists");
         const newLink = new linkModel({originalUrl,uniqueName});
         newLink.save();
         return newLink;
@@ -39,9 +39,7 @@ const linkContext ={
     redirectLink: async(name,ip)=>{
         const link = await linkModel.findOne({"uniqueName":name});
         link.clicks.push({ id:clicksId++ , insertedAt:Date.now() , ipAddress:ip})
-        // link.clicks.id = clicksId++;
-        // link.clicks.insertedAt = Date.now();
-        //link.clicks.ipAddress = reqId.getClientIp(req);
+        link.save();
         const originalUrl=link.originalUrl;
         return originalUrl;
     }
