@@ -13,6 +13,8 @@ router.put('/:id',LinkController.update);
 
 router.post('/',LinkController.add);
 
+router.post('/:uniqueName/target',LinkController.addTarget);
+
 router.delete('/:id',LinkController.delete);
 
 

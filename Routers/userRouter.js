@@ -1,11 +1,11 @@
 import express from 'express'
-import UserController from "../Controllers/userController"
+import UserController from "../Controllers/userController.js"
 
 const router = express.Router();
 
 router.get('/',UserController.getList);
 
-router.get('/:id',LinkController.getById);
+router.get('/:id',UserController.getById);
 
 router.put('/:id',UserController.update);
 

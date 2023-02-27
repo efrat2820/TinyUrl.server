@@ -15,10 +15,10 @@ const LinkController = {
     },
 
     add: async(req,res)=>{
-        const {originalUrl,uniqueName} = req.body;
+        const {originalUrl,uniqueName,name} = req.body;
         console.log('req.body', req.body)
         // try{
-            await context.addLink(originalUrl,uniqueName);
+            await context.addLink(originalUrl,uniqueName,name);
         // }catch(error){
         //     if(error.message == "exists"){
         //         res.status(400).send({message:"exists"});
@@ -44,13 +44,20 @@ const LinkController = {
 
     redirect: async(req,res)=>{
         const {uniqueName} = req.params;
+        const t = req.query.t;
         const idAddress = reqId.getClientIp(res);
-        const originalUrl = await context.redirectLink(uniqueName,idAddress);
+        const originalUrl = await context.redirectLink(uniqueName,idAddress,t);
         console.log(originalUrl);
         res.redirect(originalUrl);
         
-    }
+    },
 
+    addTarget: async(req,res)=>{
+        const {name} = req.body;
+        const {uniqueName} = req.params;
+        const newLink = await context.addTargetLink(name,uniqueName);
+        res.send(newLink);
+    }
 }
 
 export default LinkController;

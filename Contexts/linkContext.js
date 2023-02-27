@@ -1,7 +1,5 @@
 import linkModel from "../Models/LinksModel.js"
-
- 
-let clicksId = 124;
+import mongoose from "mongoose";
 
 const linkContext ={
 
@@ -15,7 +13,7 @@ const linkContext ={
         return link;
     },
 
-    addLink: async(originalUrl,uniqueName)=>{
+    addLink: async(originalUrl,uniqueName,name)=>{
         // if(linkModel.findOne({'uniqueName':uniqueName}))
         //     throw Error("exists");
         const newLink = new linkModel({originalUrl,uniqueName});
@@ -23,7 +21,6 @@ const linkContext ={
         return newLink;
     },
     
-
     updateLink: async(id,link)=>{
         const updateLink = await linkModel.findByIdAndUpdate(id,link,{new:true});
         const addLink = await updateLink.save();
@@ -35,13 +32,21 @@ const linkContext ={
         return deleted;
     },
 
-    redirectLink: async(name,ip)=>{
+    redirectLink: async(name,ip,value)=>{
         const link = await linkModel.findOne({"uniqueName":name});
-        link.clicks.push({ id:clicksId++ , insertedAt:Date.now() , ipAddress:ip})
+        link.clicks.push({insertedAt:Date.now() , ipAddress:ip, targetParamValue:value});
         link.save();
         console.log(link);
         const originalUrl=link.originalUrl;
         return originalUrl;
+    },
+
+    addTargetLink: async(name,uniqueName)=>{
+        const link = await linkModel.findOne({"uniqueName":uniqueName});
+       // const ind = (link.targetValues[link.targetValues.length-1].value)+1;//////////////
+        link.targetValues.push({name:name , value:1})/////////////
+        link.save();
+        return "https://tinyurl-m5pd.onrender.com/TinyUrl/"+uniqueName+"?t="+1;
     }
 }
 

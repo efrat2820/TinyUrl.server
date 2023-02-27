@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import { ObjectId } from 'bson';
 
 const LinksModelSchama = mongoose.Schema({
 
@@ -6,9 +7,17 @@ const LinksModelSchama = mongoose.Schema({
     "uniqueName":String,
     "clicks":[
         {
-            "id":Number,
+           // "id":ObjectId,
             "insertedAt":Date,
-            "ipAddress": String
+            "ipAddress": String,
+            "targetParamValue":Number
+        }       
+    ],
+    "targetValues":[
+        {
+            //"id":ObjectId,
+            "name":String,
+            "value":Number
         }
     ]
 

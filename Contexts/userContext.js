@@ -1,4 +1,4 @@
-import userModel from "../Models/UserModel"
+import userModel from "../Models/UserModel.js"
 
 const userContext ={
 

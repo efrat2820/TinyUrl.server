@@ -1,6 +1,6 @@
 import express from "express"
-import redirect from "express-redirect"
 import linksRouter from "./Routers/linkRouter.js"
+import usersRouter from "./Routers/userRouter.js"
 import bodyParser from 'body-parser'
 import connectDb  from './db.js'
 
@@ -10,10 +10,8 @@ const port = 5000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.text());
-//app.use('/links',linksRouter);
 
 connectDb();
-//redirect(app);
 
 app.get("/",(req,res)=>{
    res.send("hello world")
@@ -22,6 +20,7 @@ app.get("/",(req,res)=>{
 
 
 app.use('/TinyUrl',linksRouter)
+app.use('/user',usersRouter)
 
 
 app.listen(port,()=>{
