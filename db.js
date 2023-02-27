@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 
 const uri=
- "mongodb+srv://efrat:72098765@todolistcluster.u0g8v8w.mongodb.net/?retryWrites=true&w=majority"
+ "mongodb+srv://efrat:72098765@todolistcluster.u0g8v8w.mongodb.net/TinyUrl?retryWrites=true&w=majority"
 //"mongodb://localhost:27017/TinyUrl"
 
 const connectDb = async () =>{
