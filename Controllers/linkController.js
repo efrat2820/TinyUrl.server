@@ -44,7 +44,7 @@ const LinkController = {
 
     redirect: async(req,res)=>{
         const {uniqueName} = req.params;
-        const t = req.query.t;
+        const t = req.query.t;/////////////////////////////////////////
         const idAddress = reqId.getClientIp(res);
         const originalUrl = await context.redirectLink(uniqueName,idAddress,t);
         console.log(originalUrl);
