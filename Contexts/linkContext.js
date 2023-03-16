@@ -34,20 +34,18 @@ const linkContext ={
 
     redirectLink: async(name,ip,value)=>{
         const link = await linkModel.findOne({"uniqueName":name});
-        console.log('link', link);
-        link.clicks.push({insertedAt:new Date() , ipAddress:ip, targetParamValue:value});
+        link.clicks.push({insertedAt:Date.now() , ipAddress:ip, targetParamValue:value});
         link.save();
-        console.log('link1',link);
+        console.log(link);
         const originalUrl=link.originalUrl;
         return originalUrl;
     },
 
-    addTargetLink: async(name,uniqueName)=>{
+    addTargetLink: async(name,targetValue,uniqueName)=>{
         const link = await linkModel.findOne({"uniqueName":uniqueName});
-       // const ind = (link.targetValues[link.targetValues.length-1].value)+1;//////////////
-        link.targetValues.push({name:name , value:1})/////////////
+        link.targetValues.push({name:name , value:targetValue})
         link.save();
-        return "https://tinyurl.com/efratc/"+uniqueName+"?t="+1;
+        return "https://tinyurl-m5pd.onrender.com/"+uniqueName+"?t="+targetValue;
     }
 }
 

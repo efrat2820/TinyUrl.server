@@ -12,15 +12,8 @@ const userContext ={
         return user;
     },
 
-    getUserByNameAndPass: async(name,password)=>{
-        const user = await userModel.findOne({"name":name,"password":password});
-        return user;
-    },
-
-    addUser: async(name,email,password)=>{
-        // if(userModel.findOne({"name":name}))
-        //      throw Error("exists name");
-        const newUser = new userModel({name,email,password});
+    addUser: async(name,email,password,links)=>{
+        const newUser = new userModel({name,email,password,links});
         newUser.save();
         return newUser;
     },

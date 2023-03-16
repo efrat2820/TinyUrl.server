@@ -10,14 +10,14 @@ const LinksModelSchama = mongoose.Schema({
            // "id":ObjectId,
             "insertedAt":Date,
             "ipAddress": String,
-            "targetParamValue":Number
+            "targetParamValue":String
         }       
     ],
     "targetValues":[
         {
             //"id":ObjectId,
             "name":String,
-            "value":Number
+            "value":String
         }
     ]
 

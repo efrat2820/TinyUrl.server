@@ -1,6 +1,6 @@
 import context from "../Contexts/linkContext.js"
 import reqId from "request-ip"
-import mail from "../mail/mail.js"
+
 
 const LinkController = {
 
@@ -24,9 +24,8 @@ const LinkController = {
         //         res.status(400).send({message:"exists"});
         //     }
         //}
-        const tinyLink = "https://tinyurl.com/efratc/"+uniqueName;
+        const tinyLink = "https://tinyurl-m5pd.onrender.com/"+uniqueName;
         // const tinyLink = "http://localhost:5000/"+uniqueName;
-        //mail.sendEmail(tinyLink)
         res.send(tinyLink);
     },
 
@@ -46,19 +45,17 @@ const LinkController = {
     redirect: async(req,res)=>{
         const {uniqueName} = req.params;
         const t = req.query.t;/////////////////////////////////////////
-        console.log('target',t);
         const idAddress = reqId.getClientIp(res);
         const originalUrl = await context.redirectLink(uniqueName,idAddress,t);
-        console.log('originalUrl',originalUrl);
+        console.log(originalUrl);
         res.redirect(originalUrl);
         
     },
 
     addTarget: async(req,res)=>{
-        const {name} = req.body;
+        const {name,targetValue} = req.body;
         const {uniqueName} = req.params;
-        const newLink = await context.addTargetLink(name,uniqueName);
-        //mail.sendEmailTarget()
+        const newLink = await context.addTargetLink(name,targetValue,uniqueName);
         res.send(newLink);
     }
 }

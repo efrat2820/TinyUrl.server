@@ -6,7 +6,6 @@ import bodyParser from 'body-parser'
 import connectDb  from './db.js'
 import cors from "cors"
 
-
 const app = express();
 const port = 5000;
 
@@ -15,9 +14,12 @@ app.use(bodyParser.text());
 app.use(cors());
 connectDb();
 
+app.get("/",(req,res)=>{
+   res.send("hello world")
+})
 
-app.use('/login',authRouter)
 
+app.use("/login",authRouter)
 app.use('/',linksRouter)
 app.use('/user',usersRouter)
 

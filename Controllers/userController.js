@@ -12,22 +12,11 @@ const UserController = {
         res.send(user);
     },
 
-    getByNameAndPass: async(req,res)=>{
-        const user = await context.getUserByNameAndPass(req.name,req.password);
-        res.send(user);
-    },
-
     add: async(req,res)=>{
         const {name,email,password} = req.body;
-        // try{
+        console.log('req.body', req.body)
         const newUser= await context.addUser(name,email,password);
-        // }
-        // catch{
-        //     if(error.message == "exists name"){
-        //         res.status(400).send({message:"exists name"});
-        //     }
-        // }
-        mail.sendEmailRegister(name,email);
+        mail.sendEmailRegister(name,email)
         res.send(newUser);
     },
 
