@@ -1,7 +1,7 @@
 import express from "express"
 import linksRouter from "./Routers/linkRouter.js"
 import usersRouter from "./Routers/userRouter.js"
-import authRouter from "./Routers/authRouter.js"
+import authController from "./Controllers/authController.js"
 import bodyParser from 'body-parser'
 import connectDb  from './db.js'
 import cors from "cors"
@@ -18,10 +18,9 @@ app.get("/",(req,res)=>{
    res.send("hello world")
 })
 
-
-app.use("/login",authRouter)
-app.use('/',linksRouter)
-app.use('/user',usersRouter)
+app.use("/login",authController.register,usersRouter)
+app.use('/',authController.auth,linksRouter)
+app.use('/user',authController.auth,usersRouter)
 
 
 app.listen(port,()=>{

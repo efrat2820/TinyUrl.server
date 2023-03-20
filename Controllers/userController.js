@@ -17,7 +17,7 @@ const UserController = {
         console.log('req.body', req.body)
         const newUser= await context.addUser(name,email,password);
         mail.sendEmailRegister(name,email)
-        res.send(newUser);
+        //res.send(newUser);
     },
 
     update: async(req,res)=>{

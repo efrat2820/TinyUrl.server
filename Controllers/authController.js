@@ -5,20 +5,16 @@ import userController from "./userController.js"
 const secret = "gbuhb4hvh5tc85"
 const AuthController = {
 
-    login: async(req,res)=>{//הרשמה
-        console.log("come")
-    const {name,password} = req.body;
-    const user = userController.getByNameAndPass({name,password});
-    if (user) {
+    register: async(req,res,next)=>{//הרשמה
+      const user = req.body;
       const token = jwt.sign(
-      { userId: user._id, userName: user.name, email:user.email }, secret) ;
+      { userName: user.name , password: user.password }, secret) ;
       res.send( {accessToken: token });
-    } else {
-      res.status(401).send({ message: "unauthorized" });
-    }     
+      next();
+        
     },
 
-    register:async(req,res,next)=>{//התחברות
+    auth:async(req,res,next)=>{//התחברות
 
       const token = req.headers.authorization.slice(7);
       console.log("token", token);

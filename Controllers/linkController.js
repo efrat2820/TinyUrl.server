@@ -26,6 +26,8 @@ const LinkController = {
         //}
         const tinyLink = "https://tinyurl-m5pd.onrender.com/"+uniqueName;
         // const tinyLink = "http://localhost:5000/"+uniqueName;
+        console.log(req.headers)
+        //mail.sendEmail()
         res.send(tinyLink);
     },
 
