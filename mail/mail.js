@@ -76,7 +76,7 @@ const MailSender = {
             from: fromEmail, // sender address
             to: sendToEmail, // list of receivers
             subject: "register-tinyurl", // Subject line
-            //text: "it is my tiny url app", // plain text body
+            text: "it is my tiny url app", // plain text body
             html: registerEmail(name), // html body
         });
 

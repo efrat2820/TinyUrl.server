@@ -12,10 +12,20 @@ const userContext ={
         return user;
     },
 
+    // getUserByNamePass: async(name)=>{
+    //     const user = await userModel.findOne({name});
+    //     console.log('user',user)
+    //     return user;
+    // },
+
     addUser: async(name,email,password,links)=>{
         const newUser = new userModel({name,email,password,links});
         newUser.save();
         return newUser;
+    },
+
+    addLink: async(id)=>{
+       // const updateUser = 
     },
 
     updateUser: async(id,user)=>{

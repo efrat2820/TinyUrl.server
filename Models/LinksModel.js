@@ -7,7 +7,7 @@ const LinksModelSchama = mongoose.Schema({
     "uniqueName":String,
     "clicks":[
         {
-           // "id":ObjectId,
+          //"id":ObjectId,
             "insertedAt":Date,
             "ipAddress": String,
             "targetParamValue":String

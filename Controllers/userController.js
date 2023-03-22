@@ -12,10 +12,18 @@ const UserController = {
         res.send(user);
     },
 
+    // getByNameAndPass: async(req,res)=>{
+    //     const user = await context.getUserByNamePass(req.name);
+    //     console.log(user);
+        
+    //     res.send(user);
+    // },
+
     add: async(req,res)=>{
         const {name,email,password} = req.body;
         console.log('req.body', req.body)
         const newUser= await context.addUser(name,email,password);
+
         mail.sendEmailRegister(name,email)
         //res.send(newUser);
     },

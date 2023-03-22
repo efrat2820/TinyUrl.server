@@ -18,8 +18,10 @@ app.get("/",(req,res)=>{
    res.send("hello world")
 })
 
-app.use("/login",authController.register,usersRouter)
-app.use('/',authController.auth,linksRouter)
+app.use("/register",authController.register,usersRouter)
+app.use('/login',authController.login)
+app.use("/",authController.auth)
+app.use('/link',linksRouter)
 app.use('/user',authController.auth,usersRouter)
 
 

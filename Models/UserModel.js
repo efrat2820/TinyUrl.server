@@ -6,7 +6,11 @@ const UsersModelSchema = mongoose.Schema({
     "name":String,
     "email":String,
     "password":String,
-    "links":Array
+    "links":[
+        {
+            "id":String
+        }
+    ]
     
 })
 

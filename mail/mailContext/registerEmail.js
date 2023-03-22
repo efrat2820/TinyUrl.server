@@ -2,7 +2,8 @@
 const registerEmail = (name) =>{
    
     return 
-    `<center>
+   
+   `
     <div style="border: solid gray 3px ; width: 30vw; height: 50vh; border-radius: 25px; margin-top: 23vh ;padding-top: 5vh;box-shadow: 6px 6px 9px gray" >
     <h1 style="color:darkcyan ; font-family: Comic Sans MS">hi, ${name}</h1>
     <p style="color:darkslategray ; font-family: Comic Sans MS">
@@ -12,9 +13,9 @@ const registerEmail = (name) =>{
         TINYURL team. 
        
     </p>
-     <img src="./vector.png" width="200vw" height="200vh"/>
+    <img src="./vector.png" width="200vw" height="200vh"/>
     </div>
-    </center>`
+   `
 
 }
 

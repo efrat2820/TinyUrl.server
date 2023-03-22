@@ -1,5 +1,8 @@
 import context from "../Contexts/linkContext.js"
 import reqId from "request-ip"
+import userContext from "../Contexts/userContext.js"
+// import jwt from "jsonwebtoken"
+// const secret = "gbuhb4hvh5tc85"
 
 
 const LinkController = {
@@ -15,19 +18,22 @@ const LinkController = {
     },
 
     add: async(req,res)=>{
-        const {originalUrl,uniqueName,name} = req.body;
+        const {originalUrl,uniqueName} = req.body;
         console.log('req.body', req.body)
         // try{
-            await context.addLink(originalUrl,uniqueName,name);
+        const newLink =  await context.addLink(originalUrl,uniqueName);
         // }catch(error){
         //     if(error.message == "exists"){
         //         res.status(400).send({message:"exists"});
         //     }
         //}
         const tinyLink = "https://tinyurl-m5pd.onrender.com/"+uniqueName;
-        // const tinyLink = "http://localhost:5000/"+uniqueName;
-        console.log(req.headers)
-        //mail.sendEmail()
+        const user = userContext.getUserById(req.userId)
+        console.log('user',user)
+        //user.links.push({"id":newLink._id});-------------------------------------------------------
+        // const token = req.headers.authorization.slice(7);
+        // const jwt =  jwt.verify(token, secret);      
+        //mail.sendEmail(name,user.email,tinyLink)
         res.send(tinyLink);
     },
 
