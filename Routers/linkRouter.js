@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.get('/',LinkController.getList);
 
-//router.get('/:id',LinkController.getById);
+router.get('/:id',LinkController.getById);
 
 router.get('/:uniqueName',LinkController.redirect)
 

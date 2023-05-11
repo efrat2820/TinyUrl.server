@@ -1,4 +1,5 @@
 import userModel from "../Models/UserModel.js"
+import LinksModel from "../Models/LinksModel.js";
 
 const userContext ={
 
@@ -9,19 +10,21 @@ const userContext ={
 
     getUserById: async(id)=>{
         const user = await userModel.findById(id);
+        console.log('user' , user);
         return user;
     },
 
     // getUserByNamePass: async(name)=>{
     //     const user = await userModel.findOne({name});
-    //     console.log('user',user)
+    //     console.log('user',user) 
     //     return user;
     // },
 
-    addUser: async(name,email,password,links)=>{
+    addUser: (name,email,password,links)=>{
         const newUser = new userModel({name,email,password,links});
         newUser.save();
-        return newUser;
+        
+        return newUser; 
     },
 
     addLink: async(id)=>{
@@ -37,6 +40,16 @@ const userContext ={
     removeUser: async(id)=>{
         const deleted = await userModel.findByIdAndRemove(id);
         return deleted;
+    },
+
+    deleteLink: async(id,user)=>{
+       for (const [i, link] of (user.links).entries()){
+           if (link.id == id)
+           {
+            (user.links).splice(i,1);
+           }       
+       }
+       user.save();
     }
 }
 

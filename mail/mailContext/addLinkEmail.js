@@ -10,9 +10,10 @@ const addLintEmail = (name,link) =>{
       We will be happy to be of service in the future as well<br/>
      TINYURL team.<br/>
     </p>
-     <img src="./vector.png" width="200vw" height="200vh"/>
+     <img src="./logo.png" width="200vw" height="200vh"/>
     </div>
     </center>`
+    
 
 }
 
