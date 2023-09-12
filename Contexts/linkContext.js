@@ -13,7 +13,7 @@ const linkContext ={
         return link;
     },
 
-    addLink: async(originalUrl,uniqueName,name)=>{
+    addLink: async(originalUrl,uniqueName)=>{
         // if(linkModel.findOne({'uniqueName':uniqueName}))
         //     throw Error("exists");
         const newLink = new linkModel({originalUrl,uniqueName});
@@ -43,9 +43,10 @@ const linkContext ={
 
     addTargetLink: async(name,targetValue,uniqueName)=>{
         const link = await linkModel.findOne({"uniqueName":uniqueName});
+    
         link.targetValues.push({name:name , value:targetValue})
         link.save();
-        return "https://tinyurl-m5pd.onrender.com/"+uniqueName+"?t="+targetValue;
+        return "https://tinyurl.com/efratc/"+uniqueName+"?t="+targetValue;
     }
 }
 

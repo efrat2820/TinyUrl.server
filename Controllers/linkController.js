@@ -1,6 +1,7 @@
 import context from "../Contexts/linkContext.js"
 import reqId from "request-ip"
 import userContext from "../Contexts/userContext.js"
+import mail from "../mail/mail.js"
 // import jwt from "jsonwebtoken"
 // const secret = "gbuhb4hvh5tc85"
 
@@ -27,15 +28,13 @@ const LinkController = {
         //         res.status(400).send({message:"exists"});
         //     }
         //}
-        const tinyLink = "https://tinyurl-m5pd.onrender.com/"+uniqueName;
-        const user = userContext.getUserById(req.userId)
-        console.log('user',user)
-        //user.links.push({"id":newLink._id});-------------------------------------------------------
-        // const token = req.headers.authorization.slice(7);
-        // const jwt =  jwt.verify(token, secret);      
-        //mail.sendEmail(name,user.email,tinyLink)
-        res.send(tinyLink);
-    },
+        const tinyLink = "http://localhost:5000/link/"+uniqueName;
+        const user =await userContext.getUserById(req.userId)
+        user.links.push({"id":newLink._id});
+        user.save();
+        //mail.sendEmail(user.name,user.email,tinyLink)
+        res.send(tinyLink);  
+    },  
 
     update: async(req,res)=>{
         const {id} = req.params;
@@ -46,6 +45,10 @@ const LinkController = {
     },
 
     delete: async(req,res)=>{
+        const userId = req.userId;
+        const user = await userContext.getUserById(userId);
+        console.log('user',user);
+        await userContext.deleteLink(req.params.id,user);
         const deleted = await context.removeLink(req.params.id);
         res.send(deleted);
     },
@@ -57,13 +60,12 @@ const LinkController = {
         const originalUrl = await context.redirectLink(uniqueName,idAddress,t);
         console.log(originalUrl);
         res.redirect(originalUrl);
-        
     },
 
     addTarget: async(req,res)=>{
         const {name,targetValue} = req.body;
         const {uniqueName} = req.params;
-        const newLink = await context.addTargetLink(name,targetValue,uniqueName);
+        const newLink = await context.addTargetLink(name,targetValue,uniqueName);  
         res.send(newLink);
     }
 }

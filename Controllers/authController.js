@@ -1,25 +1,23 @@
 import jwt from "jsonwebtoken"
 //import userController from "./userController.js"
 import userModel from "../Models/UserModel.js"
-
+import context from "../Contexts/userContext.js"
 const secret = "gbuhb4hvh5tc85"
 const AuthController = {
 
-    register: async(req,res,next)=>{//הרשמה
-      const user = req.body;
+    register: async(req,res)=>{//הרשמה
+      const b = req.body; 
+      const user = context.addUser(b.name, b.email, b.password);
+      console.log("use",user);
       const token = jwt.sign(
-      { userName: user.name ,  email: user.email}, secret) ;
+      {userId:user._id, userName: user.name ,  email: user.email}, secret) ;
       res.send( {accessToken: token });
-      next();
         
-    },
-
+    },  
     login:async(req,res)=>{
       const {name} = req.body;
       const user = await userModel.findOne({name});
       console.log('user',user)
-      // return user;
-      // const user = userController.getByNameAndPass(name,password);
         if (user) {
         const token = jwt.sign(
           {userId:user._id, userName: user.name ,  email: user.email }, secret);
@@ -30,7 +28,8 @@ const AuthController = {
     },
 
     auth:async(req,res,next)=>{//התחברות
-      console.log('header',req.headers)
+      console.log('req',req.originalUrl)
+      console.log('header',req.headers.authorization)
       const token = req.headers.authorization.slice(7);
       console.log("token", token);
       try {
@@ -41,7 +40,7 @@ const AuthController = {
         res.status(401).send({ message: "unauthorized" });
       }
     }
-}  
-
+}       
+ 
 
 export default AuthController;

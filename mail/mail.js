@@ -8,7 +8,7 @@ const fromEmail = 'tinyurl.em@gmail.com';
 const pass = "mqixwjdsxxylcmag";
 
 const MailSender = {
-    sendEmail:async(name,link,sendToEmail)=>{
+    sendEmail:async(name,sendToEmail,link)=>{
         console.log('send email')
 
         let transporter = nodemailer.createTransport({
@@ -24,11 +24,11 @@ const MailSender = {
         let info = await transporter.sendMail({
             from: fromEmail, // sender address
             to: sendToEmail, // list of receivers
-            subject: "YinyUrl", // Subject line
+            subject: "TinyUrl", // Subject line
            // text: "it is my tiny url app", // plain text body
             html:addLinkEmail(name,link) , // html body
         });
-
+        console.log(addLinkEmail(name,link));
         console.log("Message sent: %s", info.messageId);
         console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
     }

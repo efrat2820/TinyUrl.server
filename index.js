@@ -2,6 +2,7 @@ import express from "express"
 import linksRouter from "./Routers/linkRouter.js"
 import usersRouter from "./Routers/userRouter.js"
 import authController from "./Controllers/authController.js"
+import statisticsRouter from "./Routers/statisticsRouter.js"
 import bodyParser from 'body-parser'
 import connectDb  from './db.js'
 import cors from "cors"
@@ -19,7 +20,9 @@ app.get("/",(req,res)=>{
 })
 
 app.use("/register",authController.register,usersRouter)
+app.use("/l",authController.register,usersRouter)
 app.use('/login',authController.login)
+app.use('/statistics',statisticsRouter)
 app.use("/",authController.auth)
 app.use('/link',linksRouter)
 app.use('/user',authController.auth,usersRouter)
