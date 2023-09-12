@@ -17,6 +17,7 @@ const linkContext ={
         // if(linkModel.findOne({'uniqueName':uniqueName}))
         //     throw Error("exists");
         const newLink = new linkModel({originalUrl,uniqueName});
+        console.log("Link",newLink);
         newLink.save();
         return newLink;
     },
@@ -33,7 +34,8 @@ const linkContext ={
     },
 
     redirectLink: async(name,ip,value)=>{
-        const link = await linkModel.findOne({"uniqueName":name});
+        console.log("contextName",name);
+        const link = await linkModel.findOne({"uniqueName":name}); 
         link.clicks.push({insertedAt:Date.now() , ipAddress:ip, targetParamValue:value});
         link.save();
         console.log(link);
@@ -46,8 +48,8 @@ const linkContext ={
     
         link.targetValues.push({name:name , value:targetValue})
         link.save();
-        return "https://tinyurl.com/efratc/"+uniqueName+"?t="+targetValue;
+        return "http://localhost:5000/"+uniqueName+"?t="+targetValue;
     }
 }
 
-export default linkContext;
+export default linkContext; 

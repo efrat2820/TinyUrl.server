@@ -28,7 +28,7 @@ const LinkController = {
         //         res.status(400).send({message:"exists"});
         //     }
         //}
-        const tinyLink = "http://localhost:5000/link/"+uniqueName;
+        const tinyLink = "http://localhost:5000/"+uniqueName;
         const user =await userContext.getUserById(req.userId)
         user.links.push({"id":newLink._id});
         user.save();
@@ -36,7 +36,7 @@ const LinkController = {
         res.send(tinyLink);  
     },  
 
-    update: async(req,res)=>{
+    update: async(req,res)=>{   
         const {id} = req.params;
         const {originalUrl} = req.body;
 
@@ -55,6 +55,8 @@ const LinkController = {
 
     redirect: async(req,res)=>{
         const {uniqueName} = req.params;
+        const u = req.params;
+        console.log("conrollerName",uniqueName);
         const t = req.query.t;/////////////////////////////////////////
         const idAddress = reqId.getClientIp(res);
         const originalUrl = await context.redirectLink(uniqueName,idAddress,t);
@@ -62,7 +64,7 @@ const LinkController = {
         res.redirect(originalUrl);
     },
 
-    addTarget: async(req,res)=>{
+    addTarget: async(req,res)=>{  
         const {name,targetValue} = req.body;
         const {uniqueName} = req.params;
         const newLink = await context.addTargetLink(name,targetValue,uniqueName);  
