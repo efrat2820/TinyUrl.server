@@ -13,7 +13,7 @@ const linkContext ={
         return link;
     },
 
-    addLink: async(originalUrl,uniqueName)=>{
+    addLink: async(originalUrl,uniqueName,name)=>{
         // if(linkModel.findOne({'uniqueName':uniqueName}))
         //     throw Error("exists");
         const newLink = new linkModel({originalUrl,uniqueName});
@@ -45,10 +45,9 @@ const linkContext ={
 
     addTargetLink: async(name,targetValue,uniqueName)=>{
         const link = await linkModel.findOne({"uniqueName":uniqueName});
-    
         link.targetValues.push({name:name , value:targetValue})
         link.save();
-        return "http://localhost:5000/"+uniqueName+"?t="+targetValue;
+        return "https://localhost:5000/"+uniqueName+"?t="+targetValue;
     }
 }
 

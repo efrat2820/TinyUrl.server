@@ -1,7 +1,6 @@
 import context from "../Contexts/linkContext.js"
 import reqId from "request-ip"
 import userContext from "../Contexts/userContext.js"
-import mail from "../mail/mail.js"
 // import jwt from "jsonwebtoken"
 // const secret = "gbuhb4hvh5tc85"
 
