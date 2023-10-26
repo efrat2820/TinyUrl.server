@@ -19,11 +19,13 @@ const UserController = {
     //     res.send(user);
     // },
 
-    add: async(req,res)=>{
+    add: async(req,res,next)=>{
         const {name,email,password} = req.body;
         console.log('req.body', req.body)
         const newUser= await context.addUser(name,email,password);
-
+        console.log("newUser",newUser);
+        req.userId = newUser.id;
+        next();
         //mail.sendEmailRegister(name,email)
         //res.send(newUser);
     },

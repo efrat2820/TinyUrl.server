@@ -21,7 +21,7 @@ app.get("/",(req,res)=>{
 })
 
 
-app.use("/register",authController.register,usersRouter)
+app.use("/register",usersRouter,authController.register)
 //app.use("/l",authController.register,usersRouter)
 app.use('/login',authController.login)
 app.use('/statistics',statisticsRouter)

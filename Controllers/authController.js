@@ -5,13 +5,14 @@ import context from "../Contexts/userContext.js"
 const secret = "gbuhb4hvh5tc85"
 const AuthController = {
 
-    register: async(req,res,next)=>{//הרשמה
+    register: async(req,res)=>{//הרשמה
       const user = req.body;
       const token = jwt.sign(
-      { userName: user.name ,  email: user.email}, secret) ;
+      {userId:req.userId, userName: user.name ,  email: user.email}, secret) ;
+      req.accessToken = token;
       res.send( {accessToken: token });
-        
     },  
+
     login:async(req,res)=>{
       const {name} = req.body;
       const user = await userModel.findOne({name});
@@ -30,8 +31,9 @@ const AuthController = {
       const token = req.headers.authorization.slice(7);
       console.log("token", token);
       try {
-        const decoded = jwt.verify(token, secret);
+        const decoded = jwt.verify(token, secret); 
         req.userId = decoded.userId;
+        console.log("req.userId.auth",req.userId);
         next();
       } catch {
         res.status(401).send({ message: "unauthorized" });

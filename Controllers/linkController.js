@@ -28,6 +28,7 @@ const LinkController = {
         //     }
         //}
         const tinyLink = "http://localhost:5000/"+uniqueName;
+        console.log("userId",req.userId);
         const user =await userContext.getUserById(req.userId)
         user.links.push({"id":newLink._id});
         user.save();
@@ -54,7 +55,7 @@ const LinkController = {
 
     redirect: async(req,res)=>{
         const {uniqueName} = req.params;
-        const u = req.params;
+        //const u = req.params;
         console.log("conrollerName",uniqueName);
         const t = req.query.t;/////////////////////////////////////////
         const idAddress = reqId.getClientIp(res);

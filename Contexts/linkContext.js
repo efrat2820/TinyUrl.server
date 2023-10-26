@@ -30,7 +30,7 @@ const linkContext ={
 
     removeLink: async(id)=>{
         const deleted = await linkModel.findByIdAndRemove(id);
-        return deleted;
+        return deleted;   
     },
 
     redirectLink: async(name,ip,value)=>{
@@ -47,7 +47,7 @@ const linkContext ={
         const link = await linkModel.findOne({"uniqueName":uniqueName});
         link.targetValues.push({name:name , value:targetValue})
         link.save();
-        return "https://localhost:5000/"+uniqueName+"?t="+targetValue;
+        return "http://localhost:5000/"+uniqueName+"?t="+targetValue;
     }
 }
 
